@@ -31,7 +31,7 @@ jobs:
 
       - name: Run composer install if composer.json exists
         if: steps.check_files.outputs.files_exists == 'true'
-        run: composer install --prefer-dist --no-progress
+        run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
 
 
       - name: Upload artifact for deployment job
@@ -56,9 +56,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_CFAE445CAD6042F8B236281414D7A260 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_34F23BD8253446F49AF43E5E4EBA4CFC }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_19DD3F689FFD43A9BD69D4BED98BE463 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_94EE7EAAF0A349AA806DD0924092E99E }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_54E3A3C3A79C4F1289FBDC16122441EE }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_48E32AC83F58446D828603D77A332A95 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
@@ -67,4 +67,5 @@ jobs:
           app-name: 'laravel-chatbot-test'
           slot-name: 'Production'
           package: .
+
           

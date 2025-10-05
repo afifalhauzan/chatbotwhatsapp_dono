@@ -62,7 +62,6 @@ class ReplyToWhatsappMessage
     {
         $replyText = '';
 
-        // Definisikan teks menu utama untuk digunakan kembali
         $mainMenuText = "\n\n" .
             "--------------------\n" .
             "Ketik *angka* untuk memilih opsi lain:\n" .
@@ -70,7 +69,6 @@ class ReplyToWhatsappMessage
             "2. Alamat Kantor & Jam Buka\n" .
             "3. Kontak & Kritik Saran";
 
-        // Pemicu Menu Utama
         $menuTriggers = ['menu', 'halo', 'start', 'hi', 'hello'];
         if (in_array($text, $menuTriggers) || str_contains($text, 'informasi')) {
             $replyText = "Selamat Datang di Portal Informasi Desa Dono, Kec. Sendang, Kab. Tulungagung!\n\nKetik *angka* untuk memulai pilihan.\n\n1. Info Surat\n2. Alamat Kantor & Jam Buka\n3. Kontak & Kritik Saran";
@@ -78,23 +76,18 @@ class ReplyToWhatsappMessage
             return;
         }
 
-        // Cari balasan di database berdasarkan keyword
         $botReply = BotReply::where('keyword', $text)->first();
 
         if ($botReply) {
-            // Jika keyword ditemukan di database
             $replyText = $botReply->response_text;
 
-            // Jika tipenya adalah 'info' (jawaban akhir), tambahkan menu utama
             if ($botReply->type === 'info') {
                 $replyText .= $mainMenuText;
             }
         } else {
-            // Jika keyword tidak ditemukan
             $replyText = "Maaf, pilihan tidak dikenali.\n\n_Pastikan pilihannya menggunakan angka._\n_Contoh \"1\" untuk Info Surat_" . $mainMenuText;
         }
 
-        // Kirim balasan
         Whatsapp::send($senderNumber, TextMessage::create($replyText));
     }
 }

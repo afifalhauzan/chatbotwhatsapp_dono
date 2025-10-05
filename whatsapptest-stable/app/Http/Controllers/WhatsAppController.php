@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use MissaelAnda\Whatsapp\Facade\Whatsapp;
 use MissaelAnda\Whatsapp\Messages\TemplateMessage;
+use MissaelAnda\Whatsapp\Messages\TextMessage; // Atau TemplateMessage jika Anda punya
+use Illuminate\Support\Facades\Log;
+use MissaelAnda\Whatsapp\Messages;
 
 class WhatsAppController extends Controller
 {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WhatsAppController;
@@ -17,3 +18,4 @@ use App\Http\Controllers\WhatsAppController;
 
 Route::post('/send-whatsapp', [WhatsAppController::class, 'sendHelloWorld'])->middleware('api');
 Route::post('/webhook', [WhatsAppController::class, 'handleWebhook']);
+Route::post('/notify/form-submission/{secret}', [NotificationController::class, 'handleFormSubmission']);

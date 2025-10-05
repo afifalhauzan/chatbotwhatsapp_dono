@@ -3,11 +3,13 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BotReplyController;
+use App\Http\Controllers\NotificationController;
 
 Route::get('/', function () {
     // Arahkan langsung ke halaman login jika belum login, atau ke dashboard jika sudah
     return redirect()->route('login');
 });
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
